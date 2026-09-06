@@ -13,4 +13,8 @@ export class ScoreResultComponent {
   goToCheckout(): void {
     this.router.navigate(['/checkout']);
   }
+
+  goToQuickFix(): void {
+    this.router.navigate(['/checkout'], { queryParams: { quickFix: true } });
+  }
 }

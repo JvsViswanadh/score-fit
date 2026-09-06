@@ -1,1 +1,41 @@
-<main class="pricing-page"><header class="pricing-header"><a class="brand" href="/"><span>S</span>ScoreFit</a><nav><a href="/how-it-works">How it works</a><a href="/sample-report">Sample report</a><a class="active" href="/pricing">Pricing</a></nav><a class="header-cta" href="/analyze">Try free</a></header><section class="pricing-intro"><div class="eyebrow">FAIR &amp; TRANSPARENT</div><h1>Transparent, simple pricing</h1><p>Invest in guaranteed interview pass rates. No subscriptions for single applications, cancel anytime on the Job Search Pass.</p></section><section class="pricing-cards"><article><div class="kicker">SINGLE APPLICATION</div><h2>Pay per job</h2><strong class="price">₹749<small>/ single resume</small></strong><p>Perfect when applying to a high-priority dream job with proper targeting and polish.</p><ul><li>Tailored resume in DOCX + PDF</li><li>95% ATS resume guarantee</li><li>Keyword inclusion and gap analysis</li><li>Optimized job-specific cover letter</li></ul><button type="button" (click)="chooseSingle()">Get my free score →</button></article><article class="featured"><b class="popular">BEST FOR ACTIVE SEARCH</b><div class="kicker">ALL-INCLUSIVE PASS</div><h2>Job Search Pass</h2><strong class="price">₹1,999<small>/ month</small></strong><p>Make every application a success and accelerate interview callbacks across dozens of roles.</p><ul><li>Unlimited resume tailoring</li><li>Unlimited custom cover letters</li><li>Unlimited interview prep guides</li><li>Priority ATS re-scores</li><li>Cancel anytime in one click</li></ul><button type="button" (click)="subscribe()">Subscribe →</button></article></section></main>
+<main class="pricing-page">
+  <header class="pricing-header">
+    <a class="brand" href="/"><span class="brand-mark">S</span>ScoreFit</a>
+    <nav aria-label="Primary navigation"><a href="/how-it-works">How it works</a><a href="/sample-report">Sample report</a><a class="active" href="/pricing">Pricing</a></nav>
+    <a class="header-cta" href="/analyze">Try free</a>
+  </header>
+
+  <section class="pricing-content">
+    <div class="eyebrow">FAIR &amp; TRANSPARENT</div>
+    <h1>Plans that fit your job search</h1>
+    <p class="intro">Choose the level of resume support you need. Start with a free score before you pay.</p>
+
+    <div class="pricing-cards">
+      <article class="price-card">
+        <div class="price-kicker">MINIMAL EDIT</div>
+        <h2>Quick Fix</h2>
+        <div class="price">₹149</div>
+        <p>Keyword insertion into your existing resume for a fast, focused improvement.</p>
+        <ul><li>Top 3-5 missing keywords added</li><li>Minimal edit to your existing resume</li><li>Ideal for already-strong resumes</li></ul>
+        <button class="secondary-button" type="button" (click)="chooseSingle()">Get my free score <span>→</span></button>
+      </article>
+      <article class="price-card featured">
+        <div class="popular">RECOMMENDED</div>
+        <div class="price-kicker">COMPLETE REWRITE</div>
+        <h2>Full Tailored Resume</h2>
+        <div class="price">₹749</div>
+        <p>Complete rewrite plus optional cover letter and interview prep add-ons.</p>
+        <ul><li>Every bullet tailored to the job</li><li>Clean DOCX + PDF export</li><li>Optional cover letter and interview prep</li></ul>
+        <button class="primary-button" type="button" (click)="chooseSingle()">Get my free score <span>→</span></button>
+      </article>
+      <article class="price-card">
+        <div class="price-kicker">ALL-INCLUSIVE PASS</div>
+        <h2>Job Search Pass</h2>
+        <div class="price">₹1,999<small>/ month</small></div>
+        <p>Unlimited tailoring, cover letters, and interview prep for your active search.</p>
+        <ul><li>Unlimited resume tailoring</li><li>Unlimited custom cover letters</li><li>Unlimited interview prep guides</li></ul>
+        <button class="secondary-button" type="button" (click)="subscribe()">Subscribe <span>→</span></button>
+      </article>
+    </div>
+  </section>
+</main>

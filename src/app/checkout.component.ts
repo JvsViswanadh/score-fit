@@ -10,14 +10,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent {
+  quickFix = false;
   includeCoverLetter = false;
   includeInterviewPrep = false;
   paymentMethod: 'upi' | 'card' | 'netbanking' = 'upi';
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParamMap.subscribe(params => {
-      this.includeCoverLetter = params.get('coverLetter') === 'true';
-      this.includeInterviewPrep = params.get('interviewPrep') === 'true';
+      this.quickFix = params.get('quickFix') === 'true';
+      this.includeCoverLetter = !this.quickFix && params.get('coverLetter') === 'true';
+      this.includeInterviewPrep = !this.quickFix && params.get('interviewPrep') === 'true';
     });
   }
 
@@ -26,6 +28,6 @@ export class CheckoutComponent {
   }
 
   get total(): number {
-    return 749 + (this.includeCoverLetter ? 250 : 0) + (this.includeInterviewPrep ? 350 : 0);
+    return (this.quickFix ? 149 : 749) + (this.includeCoverLetter ? 250 : 0) + (this.includeInterviewPrep ? 350 : 0);
   }
 }

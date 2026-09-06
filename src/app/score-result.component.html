@@ -31,13 +31,20 @@
       <a class="expand-link" href="#all-keywords">Expand list <span>→</span></a>
     </section>
 
-    <section class="fix-card">
-      <div class="fix-label">ϟ &nbsp; INSTANT RESOLUTION</div>
-      <h2>Get your tailored resume +<br /> cover letter for <strong>₹749</strong></h2>
-      <p>Professional restructuring to bypass Stripe's exact ATS filters and rank in the top 5%.</p>
-      <ul><li>Instant 1-click bullet rewrite aligned to Stripe PM scope</li><li><b>+26% ATS score boost</b> guaranteed on re-scan</li><li>ATS-certified DOCX &amp; PDF ready for immediate submission</li></ul>
-      <button class="fix-button" type="button" (click)="goToCheckout()">Fix my resume now <span>→</span></button>
-      <small class="guarantee">◉ &nbsp;100% money-back ATS pass guarantee</small>
+    <section class="fix-options" aria-label="Resume fix options">
+      <article class="fix-card quick-fix-card">
+        <div class="fix-label">ϟ &nbsp; QUICK EDIT</div>
+        <h2>Quick Fix <strong>— ₹149</strong></h2>
+        <p>We insert your top 3-5 missing keywords directly into your existing resume — a fast, minimal edit, not a full rewrite. Good if your resume is already strong and just needs the right words in it.</p>
+        <button class="fix-button" type="button" (click)="goToQuickFix()">Get quick fix <span>→</span></button>
+      </article>
+      <article class="fix-card featured-fix-card">
+        <div class="fix-label">ϟ &nbsp; RECOMMENDED</div>
+        <h2>Full Tailored Resume <strong>— ₹749</strong></h2>
+        <p>A complete rewrite: every bullet reworded, formatting cleaned up, structured specifically for this job's ATS. Includes DOCX + PDF. Best if you want the strongest possible version, not just a patch.</p>
+        <button class="fix-button" type="button" (click)="goToCheckout()">Get full tailored resume <span>→</span></button>
+        <small class="guarantee">◉ &nbsp;100% money-back ATS pass guarantee</small>
+      </article>
     </section>
 
     <div class="trust-row"><span>♙ &nbsp;Encrypted Analysis</span><span>◌ &nbsp;60-Sec Turnaround</span></div>
