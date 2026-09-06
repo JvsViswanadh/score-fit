@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +8,4 @@ import { Router, RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  inputMode: 'url' | 'text' = 'url';
-
-  constructor(private router: Router) {}
-
-  goToScoreResult(): void {
-    this.router.navigate(['/score-result']);
-  }
-
-  goToSubscribe(): void {
-    this.router.navigate(['/subscribe']);
-  }
-
-  goToSampleReport(): void {
-    this.router.navigate(['/sample-report']);
-  }
-}
+export class AppComponent {}
