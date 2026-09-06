@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrl: './analyze.component.scss'
 })
 export class AnalyzeComponent {
+  inputMode: 'url' | 'text' = 'url';
+
   constructor(private router: Router) {}
 
   getScore(): void {
