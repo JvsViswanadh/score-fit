@@ -17,13 +17,19 @@
     <section class="analysis-card" id="analyze" aria-label="Resume analysis form">
       <div class="form-columns">
         <div class="form-column resume-column">
-          <div class="field-label"><span>1</span>Your Resume <small>PDF or DOCX</small></div>
+          <div class="field-label"><span>1</span>Your Resume <small>PDF or DOC · max 2 MB</small></div>
           <label class="drop-zone">
-            <input type="file" accept=".pdf,.doc,.docx" />
+            <input type="file" accept=".pdf,.doc,application/pdf,application/msword" (change)="handleFileSelection($event)" />
             <span class="upload-icon">↑</span>
             <strong>Drop your resume here or <em>browse files</em></strong>
-            <small>Confidential &amp; processed instantly</small>
+            <small>PDF or DOC · Confidential &amp; processed instantly</small>
           </label>
+          @if (uploadError) {
+            <p class="upload-error" role="alert">{{ uploadError }}</p>
+          }
+          @if (selectedFile) {
+            <div class="selected-file"><span>✓</span><div><strong>{{ selectedFile.name }}</strong><small>{{ (selectedFile.size / 1024 / 1024).toFixed(2) }} MB</small><div class="progress-track"><i [style.width.%]="uploadProgress"></i></div></div><b>{{ uploadProgress }}%</b></div>
+          }
         </div>
         <div class="form-column">
           <div class="field-label"><span>2</span>Target Position <div class="tabs"><button [class.active]="inputMode === 'url'" (click)="inputMode = 'url'">URL</button><button [class.active]="inputMode === 'text'" (click)="inputMode = 'text'">Text</button></div></div>
