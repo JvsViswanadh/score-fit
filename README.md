@@ -1,1 +1,154 @@
-# score-fit
+# ScoreFit — AI Resume Tailoring & ATS Score Checker
+
+## 1. Idea
+
+ScoreFit is an AI-powered tool that helps job seekers get past Applicant
+Tracking Systems (ATS) and land more interviews. A user pastes a job link or
+job description alongside their current resume. ScoreFit instantly analyses
+the match and returns:
+
+- An **ATS match score** (0–100%) showing how well the resume aligns with
+  the job description
+- A list of **missing high-impact keywords** the ATS is likely filtering on
+- A **tailored, rewritten resume** (same real experience, reworded and
+  reordered to include the missing keywords — never fabricated)
+- An optional **AI-generated cover letter** matched to the role
+- An optional **interview prep PDF** with likely questions and model answers
+  based on the job description and the user's own background
+
+The core insight behind the product: the free ATS score is the trust-building
+hook (no signup, instant, specific), and the paid tailored output is the
+value moment — priced to beat a human resume writer on both cost and speed
+(₹1,500–5,000 and 3–4 days for a human vs ₹749 and 5 minutes for ScoreFit).
+
+## 2. Target user
+
+Active job seekers applying to multiple roles — new grads, career switchers,
+and professionals doing high-volume applications — who want to know *why*
+they aren't getting interviews and fix it in minutes, not days.
+
+## 3. Product flow
+
+```
+Landing (/) 
+  → free upload + score → Score Result (/score-result)
+    → "Fix my resume now" → Checkout (/checkout)
+      → guest payment, no account required → Delivery (/delivery)
+        → downloads (only items purchased)
+        → subscription upsell → Subscribe (/subscribe)
+          → sign in (email or Google) → Account (/account)
+            → "Start tailoring" → back to Landing
+
+Secondary path:
+Landing → "Sample Report" → Sample Report (/sample-report)
+  → "Try it yourself" → back to Landing upload box
+```
+
+Sign-in is intentionally deferred to the subscription step only — one-time
+paid users never need to create an account. This keeps the funnel honest:
+free → paid job → optionally becomes a signed-in subscriber, never a forced
+signup earlier.
+
+## 4. Pricing
+
+| Tier | Price | What's included |
+|---|---|---|
+| Free score | ₹0 | Instant ATS match score, no signup |
+| Pay-per-job | ₹749 | Tailored resume (DOCX + PDF) |
+| + Cover letter add-on | +₹250 | Role-specific cover letter |
+| + Interview prep add-on | +₹350 | Top 15 questions + model answers (PDF) |
+| Job Search Pass (subscription) | ₹1,999/month | Unlimited tailoring, cover letters, and interview prep |
+
+Pricing is anchored on checkout against the human alternative
+("Professional resume writers charge ₹1,500–5,000 and take 3–4 days. Get
+yours in 5 minutes.") to make the value gap obvious at the point of payment.
+
+## 5. Tech stack
+
+| Layer | Tool |
+|---|---|
+| Frontend framework | Angular (standalone components) |
+| Design / page building | Builder.io (Visual Copilot / Generate + Add Interactivity), screens originally prototyped in Stitch |
+| Backend (separate deploy — Angular has no server-side API routes) | Node/Express or FastAPI |
+| Resume parsing | `pdf-parse` (PDF), `mammoth` (DOCX) |
+| Output file generation | `docx` npm package, `pdf-lib` |
+| AI | Claude API — Haiku 4.5 for ATS scoring (cheap, fast, consistent), Sonnet 5 for resume rewriting, cover letters, and interview prep generation (higher-quality writing) |
+| Auth + database | Supabase |
+| Payments | Razorpay (UPI, primary for India) + Stripe (global cards) |
+| Hosting | Vercel or Render (backend), Angular build hosted alongside or on its own static host |
+| Dev tools | GitHub Copilot for backend code |
+
+### Estimated AI cost per full paid run
+
+| Task | Model | Approx. cost |
+|---|---|---|
+| ATS score (free tier) | Haiku 4.5 | ~₹1–2 |
+| Tailored resume rewrite | Sonnet 5 | ~₹4–5 |
+| Cover letter | Sonnet 5 | ~₹2–3 |
+| Interview prep PDF | Sonnet 5 | ~₹3–4 |
+| **Full paid bundle** | — | **~₹9–12** |
+
+Against a ₹749–1,349 order, this is roughly 95%+ gross margin.
+
+## 6. Monthly budget (early stage)
+
+| Item | Approx. cost |
+|---|---|
+| Hosting (frontend + backend, free/starter tiers) | ₹0–1,900 |
+| Supabase (free tier initially) | ₹0 |
+| Claude API (first 100–200 paid uses) | ₹950–1,900 |
+| Payment gateway fees | ~2–3% per transaction |
+| Domain (amortized) | ~₹95/month |
+| **Total pre-scale** | **~₹2,400–3,800/month** |
+
+## 7. Build status
+
+- [x] All screens designed in Stitch (Landing, Score Result, Checkout,
+      Delivery, Sample Report)
+- [x] Angular project scaffolded and connected to Builder.io
+- [x] All 7 pages generated in Builder.io with mock data
+- [x] Navigation and in-page interactivity (checkbox totals, button routes)
+      wired across all pages
+- [ ] Backend service for resume parsing, Claude API calls, and file
+      generation
+- [ ] Payment integration (Razorpay + Stripe)
+- [ ] Supabase auth wired to the Subscribe/Account flow
+- [ ] Real ATS scoring logic (rule-based keyword matching + Claude-assisted
+      analysis)
+- [ ] End-to-end test: real resume + real job description → real tailored
+      output
+- [ ] Deploy to production hosting
+- [ ] Launch
+
+## 8. Next milestones (in order)
+
+1. Build the backend service and a single working endpoint
+   (`POST /api/score`) that takes a resume + job description and returns a
+   real ATS score
+2. Connect that endpoint to the Angular app, replacing mock data on the
+   Score Result page
+3. Add the resume rewriting and file-generation endpoints, wire to Checkout
+   → Delivery
+4. Integrate Razorpay/Stripe on the Checkout page
+5. Wire Supabase auth to the Subscribe → Account flow
+6. Soft-launch to a small group (placement cells, job-search communities)
+   for real feedback before spending on marketing
+
+## 9. Marketing strategy (post-launch)
+
+- SEO on transactional keywords ("ATS resume checker free", "tailor resume
+  for [job title]") rather than brand keywords
+- Reddit/LinkedIn presence in job-search communities — lead with the free
+  score tool, not a sales pitch
+- College/bootcamp placement cell outreach — high-intent, low-CAC during
+  placement season
+- WhatsApp/Telegram job-search groups (India-specific, high engagement)
+- Free ATS checker as the primary lead magnet and growth wedge
+
+## 10. Open questions to revisit
+
+- Final positioning: "beat the ATS" (score/keyword framing) vs. "get more
+  interviews" (outcome framing) — the latter is more honest and
+  differentiates from the crowded ATS-score category
+- Whether to add an application tracker / resume version history — deferred
+  post-launch, not part of MVP
