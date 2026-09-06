@@ -32,7 +32,8 @@ they aren't getting interviews and fix it in minutes, not days.
 ```
 Landing (/) 
   → free upload + score → Score Result (/score-result)
-    → "Fix my resume now" → Checkout (/checkout)
+    → "Get quick fix" (₹149)        → Checkout (/checkout, Quick Fix only)
+    → "Get full tailored resume"    → Checkout (/checkout, ₹749 + add-ons)
       → guest payment, no account required → Delivery (/delivery)
         → downloads (only items purchased)
         → subscription upsell → Subscribe (/subscribe)
@@ -44,6 +45,10 @@ Landing → "Sample Report" → Sample Report (/sample-report)
   → "Try it yourself" → back to Landing upload box
 ```
 
+Score Result presents Quick Fix and Full Tailored Resume as two side-by-side
+cards, each with its own description, so users self-select rather than being
+pushed toward one option.
+
 Sign-in is intentionally deferred to the subscription step only — one-time
 paid users never need to create an account. This keeps the funnel honest:
 free → paid job → optionally becomes a signed-in subscriber, never a forced
@@ -54,14 +59,28 @@ signup earlier.
 | Tier | Price | What's included |
 |---|---|---|
 | Free score | ₹0 | Instant ATS match score, no signup |
-| Pay-per-job | ₹749 | Tailored resume (DOCX + PDF) |
-| + Cover letter add-on | +₹250 | Role-specific cover letter |
-| + Interview prep add-on | +₹350 | Top 15 questions + model answers (PDF) |
+| Quick Fix | ₹149 | Top 3–5 missing keywords inserted directly into the existing resume — a fast, minimal edit, not a full rewrite |
+| Full Tailored Resume | ₹749 | Complete rewrite: every bullet reworded, formatting cleaned up, structured for this job's ATS (DOCX + PDF) |
+| + Cover letter add-on | +₹250 | Role-specific cover letter (add-on to Full Tailored Resume only) |
+| + Interview prep add-on | +₹350 | Top 15 questions + model answers, PDF (add-on to Full Tailored Resume only) |
 | Job Search Pass (subscription) | ₹1,999/month | Unlimited tailoring, cover letters, and interview prep |
 
-Pricing is anchored on checkout against the human alternative
-("Professional resume writers charge ₹1,500–5,000 and take 3–4 days. Get
-yours in 5 minutes.") to make the value gap obvious at the point of payment.
+Quick Fix exists as a low-friction first purchase ("tripwire" tier) — its
+job is conversion and trust-building at a price point that requires zero
+deliberation, not standalone profit. Cost per use is still ~₹9–12 regardless
+of tier, so margin is not the constraint; the goal is capturing one-time
+users who won't commit ₹749 on a first visit but will take a ₹149 punt, some
+share of whom return for the full ₹749 tier afterward.
+
+Full Tailored Resume pricing is anchored on checkout against the human
+alternative ("Professional resume writers charge ₹1,500–5,000 and take 3–4
+days. Get yours in 5 minutes.") — this anchor line is used only on the
+₹749 tier, not on Quick Fix, since the comparison only makes sense against a
+full rewrite.
+
+On the Score Result page, Quick Fix and Full Tailored Resume are presented
+side by side as two distinct, clearly described options so users self-select
+based on what they actually need — not as a discount on the same product.
 
 ## 5. Tech stack
 
@@ -78,17 +97,20 @@ yours in 5 minutes.") to make the value gap obvious at the point of payment.
 | Hosting | Vercel or Render (backend), Angular build hosted alongside or on its own static host |
 | Dev tools | GitHub Copilot for backend code |
 
-### Estimated AI cost per full paid run
+### Estimated AI cost per paid run
 
 | Task | Model | Approx. cost |
 |---|---|---|
 | ATS score (free tier) | Haiku 4.5 | ~₹1–2 |
+| Quick Fix (keyword insertion only) | Haiku 4.5 / Sonnet 5 | ~₹2–3 |
 | Tailored resume rewrite | Sonnet 5 | ~₹4–5 |
 | Cover letter | Sonnet 5 | ~₹2–3 |
 | Interview prep PDF | Sonnet 5 | ~₹3–4 |
-| **Full paid bundle** | — | **~₹9–12** |
+| **Full paid bundle (Full Tailored Resume + both add-ons)** | — | **~₹9–12** |
 
-Against a ₹749–1,349 order, this is roughly 95%+ gross margin.
+Even at the ₹149 Quick Fix price point, margin stays above 94% — margin is
+not the constraint on how low this tier can go; conversion and trust-building
+are the actual goals of that price point.
 
 ## 6. Monthly budget (early stage)
 
